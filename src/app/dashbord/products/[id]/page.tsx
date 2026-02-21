@@ -1,11 +1,14 @@
- interface Iprops {
-    params: Promise<{id: string}>
- }
+import React from 'react'
 
-async function productsId({params} : Iprops) {
-    const { id } = await params;
-
-    return <h3>is product Id = {id} </h3>
+interface Iprops { 
+    params: {id: string}
 }
 
-export default productsId
+const productId =  async({params} : Iprops) => {
+    const { id } = await params;
+    return (
+    <div> id  prducts ID  = {id} </div>
+  )
+}
+
+export default productId
