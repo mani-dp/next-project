@@ -1,12 +1,7 @@
+import Contents from "@/components/Contents";
+import { dataFetching } from "@/core/api/fetch";
 import { Iusers } from "@/core/type/Iusers";
 
-const dataFetching = async (): Promise<Iusers[]> => {
-    const result = await fetch('https://699a1bde377ac05ce28d42bd.mockapi.io/dataUsers')
-    if (!result.ok) {
-        throw new Error("error in the fetching data")
-    }
-    return result.json();
-}
 
 const EventPage = async () => {
     const events = await dataFetching();
