@@ -1,13 +1,15 @@
-import React, { Children, ReactNode } from "react"
+import React, { ReactNode } from "react"
 
- 
-interface Ibibb { 
-  children: ReactNode
+interface Ichildren {
+
+  children: ReactNode,
 }
 
-const Contents: React.FC<Ibibb> = ()  => {
+const Contents = ({children} :Ichildren )  => {
   return (
-    <div className="flex justify-center items-center w-7xl max-h-screen mx-auto"></div>
+    <div className="flex justify-center items-center w-7xl max-h-screen mx-auto">
+      {children}
+    </div>
   )
 }
 
