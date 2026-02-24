@@ -1,17 +1,15 @@
 import ContactUsers from "@/components/ContactUsers";
 import Contents from "@/components/Contents";
-import { getusers } from "@/core/api/users";
-import Image from "next/image";
+import getusers from "@/core/api/users";
 
 const UsersData = async () => {
     const events = await getusers();
     return (
         <div>
-
             {events.map((value) => (
                 <div key={value.id}>
                     <Contents>
-                            <ContactUsers user={value} />
+                            <ContactUsers value={value} />
                     </Contents>
                 </div>
             ))}

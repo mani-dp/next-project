@@ -1,23 +1,22 @@
-import { getusers } from '@/core/api/users'
 import { Iusers } from '@/core/type/Iusers'
 import Image from 'next/image'
 import React from 'react'
 
 interface contactProp {
-    user: Iusers
+    value: Iusers
 }
 
-const ContactUsers = async ({ user }:contactProp ) => {
+const ContactUsers = async ({ value }:contactProp ) => {
 
     return (
         <div>
             <div className="flex flex-col border border-zinc-800 ">
-                <div className="flex justify-center gap-3.5 ">
-                    <div>{user.name}</div>
+                <div className="flex justify-between items-center w-60 gap-3.5 ">
+                    <div className='w-25 ml-4 '>{value.name}</div>
                     <Image
                         width={100}
                         height={100}
-                        src={user.avatar}
+                        src={value.avatar}
                         alt='without image'
                     />
                 </div>
