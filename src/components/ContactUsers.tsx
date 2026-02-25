@@ -6,7 +6,7 @@ interface contactProp {
     value: Iusers
 }
 
-const ContactUsers = async ({ value }:contactProp ) => {
+const ContactUsers : React.FC<contactProp> = async ({ value }) => {
 
     return (
         <div>

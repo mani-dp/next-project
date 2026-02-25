@@ -1,5 +1,8 @@
+import BookingForm from "@/components/BookingForm/BookingForm"
 import SubmitButton from "@/components/submitButton/SubmitButton"
-import { Iusers } from "@/core/type/Iusers"
+import { IBookingMessageHandle } from "@/core/type/IBookingMessage"
+
+
 
 interface Iid {
     params: {
@@ -7,35 +10,39 @@ interface Iid {
     }
 }
 
-const bookevent =  async(FormData: FormData) => {
+const bookevent = async (
+    prevState: IBookingMessageHandle,
+    FormData: FormData
+): Promise<IBookingMessageHandle> => {
+
+
     const eventesId = FormData.get('userId')
     const useId = '2'
-    const res = await fetch(`https://699a1bde377ac05ce28d42bd.mockapi.io/dataUsers/${eventesId}`,
-        {
-            method: 'PUT',
-            body: JSON.stringify({
-                participants: { eventesId }
-            }),
-            headers: {
-                "Contents-Type": "appliccation/json"
-            },
+    try {
+        const res = await fetch(`https://699a1bde377ac05ce28d42bd.mockapi.io/dataUsers/${eventesId}`,
+            {
+                method: 'PUT',
+                body: JSON.stringify({
+                    participants: { eventesId }
+                }),
+                headers: {
+                    "Contents-Type": "appliccation/json"
+                },
+            }
+        )
+        if (!res.ok) {
+            return { message: "error in booking" }
         }
-    )
-
-    const jsonResult = await res.json();
-    console.log('jsonResult', jsonResult)
-    return jsonResult
+        return { message: "events booked successfully " }
+    } catch (err) {
+        return { message: "network error !!!" }
+    }
 
 }
 
 const HandleForm = ({ params }: Iid) => {
-
     return (
-        <form action={bookevent}>
-            <input type="hidden" name="userId" value={params.id} />
-            <SubmitButton />
-        </form>
+        <BookingForm action={bookevent} eventId= {params.id} />
     )
 }
-
 export default HandleForm
