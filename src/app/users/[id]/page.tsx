@@ -3,7 +3,7 @@
 import BookingForm from "@/components/BookingForm/BookingForm"
 import SubmitButton from "@/components/submitButton/SubmitButton"
 import { IBookingMessageHandle } from "@/core/type/IBookingMessage"
-
+import { exportTraceState } from "next/dist/trace"
 
 
 interface Iid {
@@ -24,7 +24,7 @@ const bookevent = async (
             {
                 method: 'PUT',
                 body: JSON.stringify({
-                    booked : true
+                    booked: true
                 }),
                 headers: {
                     "Contents-Type": "appliccation/json"
@@ -43,7 +43,7 @@ const bookevent = async (
 
 const HandleForm = ({ params }: Iid) => {
     return (
-        <BookingForm action={bookevent} eventId= {params.id} />
+        <BookingForm action={bookevent} eventId={params.id} />
     )
 }
 export default HandleForm
