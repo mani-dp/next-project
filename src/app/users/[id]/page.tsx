@@ -1,3 +1,5 @@
+'use client'
+
 import BookingForm from "@/components/BookingForm/BookingForm"
 import SubmitButton from "@/components/submitButton/SubmitButton"
 import { IBookingMessageHandle } from "@/core/type/IBookingMessage"
@@ -15,7 +17,6 @@ const bookevent = async (
     FormData: FormData
 ): Promise<IBookingMessageHandle> => {
 
-
     const eventesId = FormData.get('userId')
     const useId = '2'
     try {
@@ -23,7 +24,7 @@ const bookevent = async (
             {
                 method: 'PUT',
                 body: JSON.stringify({
-                    participants: { eventesId }
+                    booked : true
                 }),
                 headers: {
                     "Contents-Type": "appliccation/json"
