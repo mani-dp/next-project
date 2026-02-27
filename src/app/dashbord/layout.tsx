@@ -17,8 +17,8 @@ const DashbordLayout: FC<Ichildren> = ({ children, news, analytics}) => {
 
         <div className="grow flex flex-wrap gap-1.5"> 
             <div className="text-xl w-full "> dashbord</div>
-            <div className=" w-[40%]  border " > {news} </div>
-            <div className=" w-[40%] border">{analytics}</div>
+            <div className=" w-[40%]  border " > new :  {news} </div>
+            <div className=" w-[40%] border"> analytics : {analytics}</div>
         </div>
         <div className="flex ">
             <aside className="w-52 p-5 bg-blue-950">

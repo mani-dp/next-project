@@ -1,6 +1,7 @@
 import BookingForm from "@/components/BookingForm/BookingForm"
 import { IBookingMessageHandle } from "@/core/type/IBookingMessage"
 import { createInitialRSCPayloadFromFallbackPrerender } from "next/dist/client/flight-data-helpers"
+import { Cookie } from "next/font/google"
 
 interface Iid {
     params: {

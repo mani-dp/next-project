@@ -9,8 +9,8 @@ const SearchForm = () => {
     const router = useRouter();
     const searchParams = useSearchParams()
     const [query, setQuery] = useState(searchParams.get('search') || '')
-    const handleSearch = (e: React.SubmitEvent) => {
-        e.preventDefault()
+    const handleSearch = (even: React.SubmitEvent) => {
+        even.preventDefault()
         const params = new URLSearchParams(searchParams.toString());
         params.set("search", query);
         router.push(`?${params.toString()}`);
@@ -26,7 +26,7 @@ const SearchForm = () => {
                 type="search"
                 placeholder="search event....."
                 value={query}
-                onChange={(e) => { setQuery(e.target.value) }}
+                onChange={(even) => { setQuery(even.target.value) }}
 
             />
             <button
