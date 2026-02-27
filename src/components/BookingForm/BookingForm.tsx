@@ -1,8 +1,8 @@
 "use client";
-import React, { FC } from 'react'
+import React, { FC, useActionState } from 'react'
 import SubmitButton from '../submitButton/SubmitButton'
 import { IBookingMessageHandle } from '@/core/type/IBookingMessage'
-import { useFormState } from 'react-dom'
+import { useFormState } from 'react-dom';
 
 
 interface Iprops {
@@ -14,12 +14,14 @@ interface Iprops {
 }
 
 const BookingForm: FC<Iprops> = ({ action,eventId }) => {
-    const initialSatae : IBookingMessageHandle = {message: ""};
-    const [state, formAction] = useFormState(action, initialSatae)
-    console.log("state", state)
+    const initialSatae : IBookingMessageHandle  = {message: ""};
+    const [state,FormAction, pending]  = useActionState(action,initialSatae)
+    // const [state,FormAction]  = useFormState(action,initialSatae). ////// "use FormState" =  "sue ActionState"
+   console.log('state', state, pending)
+   console.log("eventId sent:", eventId)
     return (
-        <form action={formAction}>
-            <input type="hidden" name="userId" value={eventId}  />
+        <form action={FormAction}>
+            <input type="hidden" name="userId" value={eventId} />
             <SubmitButton />
         </form>
     )

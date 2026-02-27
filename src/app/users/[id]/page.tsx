@@ -1,49 +1,46 @@
-'use client'
-
 import BookingForm from "@/components/BookingForm/BookingForm"
-import SubmitButton from "@/components/submitButton/SubmitButton"
 import { IBookingMessageHandle } from "@/core/type/IBookingMessage"
-import { exportTraceState } from "next/dist/trace"
-
+import { createInitialRSCPayloadFromFallbackPrerender } from "next/dist/client/flight-data-helpers"
 
 interface Iid {
     params: {
-        id: string
+        id: string,
     }
 }
 
-const bookevent = async (
+export async function bookevent(
     prevState: IBookingMessageHandle,
     FormData: FormData
-): Promise<IBookingMessageHandle> => {
-
-    const eventesId = FormData.get('userId')
-    const useId = '2'
+): Promise<IBookingMessageHandle> {
+    'use server'
+    const eventId = FormData.get('userId') 
+    if (!eventId) {
+            return { message : "invalid id"}
+    }
     try {
-        const res = await fetch(`https://699a1bde377ac05ce28d42bd.mockapi.io/dataUsers/${eventesId}`,
+        const res = await fetch(`https://699a1bde377ac05ce28d42bd.mockapi.io/dataUsers/${eventId}`,
             {
                 method: 'PUT',
-                body: JSON.stringify({
-                    booked: true
-                }),
+                body: JSON.stringify({ booked: true }),
                 headers: {
-                    "Contents-Type": "appliccation/json"
+                    "Content-Type": "application/json"
                 },
             }
         )
         if (!res.ok) {
             return { message: "error in booking" }
         }
-        return { message: "events booked successfully " }
+       return {message: 'successfully!!!!!'}
     } catch (err) {
         return { message: "network error !!!" }
     }
 
 }
 
-const HandleForm = ({ params }: Iid) => {
+export default async function HandleForm({ params }: Iid) {
+    const { id } = await params;
     return (
-        <BookingForm action={bookevent} eventId={params.id} />
+        <BookingForm action={bookevent} eventId={id} />
     )
 }
-export default HandleForm
+
